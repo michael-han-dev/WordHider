@@ -237,7 +237,58 @@ void testJumble() {
 	else {
 		cout << "getJumble returns a puzzle with the correct characters." << endl;
 	}
+	// My Tests
+	// Test Case 1
+	cout << "Test Case 1: Testing exceptions for invalid word lengths" << endl;
 
+    try {
+        JumblePuzzle jpShort("hi", "easy");
+        cout << "Failed to throw exception for word length less than 3" << endl;
+    } catch (BadJumbleException& e) {
+        cout << "Passed: Exception caught for word length less than 3: " << e.what() << endl;
+    }
+	try {
+        JumblePuzzle jpLong("thiswordistoolong", "easy");
+        cout << "Failed to throw exception for word length greater than 10" << endl;
+    } catch (BadJumbleException& e) {
+        cout << "Passed: Exception caught for word length greater than 10: " << e.what() << endl;
+    }
+
+	// Test Case 2
+	cout << "\nTest Case 2: Testing exceptions for invalid difficulty levels" << endl;
+
+    try {
+        JumblePuzzle jpInvalidDifficulty("test", "superhard");
+        cout << "Failed to throw exception for invalid difficulty level" << endl;
+    } catch (BadJumbleException& e) {
+        cout << "Passed: Exception caught for invalid difficulty level: " << e.what() << endl;
+    }
+
+    try {
+        JumblePuzzle jpEmptyDifficulty("test", "");
+        cout << "Failed to throw exception for empty difficulty level" << endl;
+    } catch (BadJumbleException& e) {
+        cout << "Passed: Exception caught for empty difficulty level: " << e.what() << endl;
+    }
+
+	// Test Case 3
+    cout << "\nTest Case 3: Testing exceptions for words containing non-letter characters" << endl;
+
+    try {
+        JumblePuzzle jpNumberInWord("test1", "easy");
+        cout << "Failed to throw exception for word containing digits" << endl;
+    } catch (BadJumbleException& e) {
+        cout << "Passed: Exception caught for word containing digits: " << e.what() << endl;
+    }
+
+    try {
+        JumblePuzzle jpSpecialCharInWord("test!", "easy");
+        cout << "Failed to throw exception for word containing special characters" << endl;
+    } catch (BadJumbleException& e) {
+        cout << "Passed: Exception caught for word containing special characters: " << e.what() << endl;
+    }
+
+	
 
 } // end testJumble
 
@@ -246,7 +297,7 @@ int main() {
 	testJumble();
 
 	// Make sure your class works before you play the game!
-	playGame();
+	//playGame();
 
 	return 0;
 } // end main
